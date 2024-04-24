@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppState, User } from "@models/dataModel";
 import { Direction, PaletteMode } from "@mui/material";
-import { GlobalConfig } from "config";
+import { AppConfig } from "config";
 
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    paletteMode: GlobalConfig.paletteMode,
-    lang: GlobalConfig.lang,
-    direction: GlobalConfig.direction,
+    paletteMode: AppConfig.paletteMode,
+    lang: AppConfig.lang,
+    direction: AppConfig.direction,
   } as AppState,
   reducers: {
     changePalette: (state: AppState, action: PayloadAction<PaletteMode>) => {
