@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppState, User } from "@models/dataModel";
+import { AppState } from "@models/dataModel";
 import { Direction, PaletteMode } from "@mui/material";
 import { AppConfig } from "config";
 

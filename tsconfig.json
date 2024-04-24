@@ -11,6 +11,7 @@
       "@i18n/*": ["_i18n/*"],
       "@models/*": ["_models/*"],
       "@redux/*": ["_redux/*"],
+      "@services/*": ["_services/*"],
       "@theme/*": ["_theme/*"],
     },
     "allowJs": true,
