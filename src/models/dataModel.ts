@@ -1,24 +1,24 @@
 import { ReactNode } from "react";
 import { Direction, PaletteMode } from "@mui/material";
+import { Localization } from "@mui/material/locale";
 
-export type Language = 'fa' | 'en';
+export type SafeAny = any;
 
-export interface GlobalConfig {
-  paletteMode: PaletteMode;
-  direction: Direction;
-  lang: Language;
+export interface Locale {
+  label: string;
+  value: string;
+  systemValue: Localization;
 }
 
 export interface AppState {
   paletteMode: PaletteMode;
   direction: Direction;
-  lang: Language;
+  lang: Locale;
 }
 
 export type UserState = User;
 
 export interface User {
-
 }
 
 export interface RootState {
@@ -26,6 +26,4 @@ export interface RootState {
   app: AppState;
 }
 
-export interface ChildrenOnly {
-  children: ReactNode;
-}
+export type WithChildren<T = any> = { children: ReactNode; } & T;

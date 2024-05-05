@@ -5,10 +5,10 @@ import { ComponentsOverrides } from "@theme/overrides";
 import { ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
 import { palette } from './palette';
 import { typography } from './typography';
-import { ChildrenOnly } from "@models/dataModel";
+import { WithChildren } from "@models/dataModel";
 import { useApp } from "@hooks/useApp";
 
-export const ThemeProvider = ({children}: ChildrenOnly) => {
+export const ThemeProvider = ({children}: WithChildren) => {
   const {paletteMode, direction} = useApp();
   const themeOptions: ThemeOptions = useMemo(() => ({
     palette: palette[paletteMode],
