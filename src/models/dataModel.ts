@@ -1,19 +1,14 @@
 import { ReactNode } from "react";
 import { Direction, PaletteMode } from "@mui/material";
-import { Localization } from "@mui/material/locale";
+import { Locale } from "@models/theme";
 
 export type SafeAny = any;
-
-export interface Locale {
-  label: string;
-  value: string;
-  systemValue: Localization;
-}
 
 export interface AppState {
   paletteMode: PaletteMode;
   direction: Direction;
-  lang: Locale;
+  locale: Locale;
+  langStorageKey: string;
 }
 
 export type UserState = User;

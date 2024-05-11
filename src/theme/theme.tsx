@@ -7,6 +7,10 @@ import { palette } from './palette';
 import { typography } from './typography';
 import { WithChildren } from "@models/dataModel";
 import { useApp } from "@hooks/useApp";
+import { AppConfig } from "@root/config";
+import * as muiLocales from "@mui/material/locale";
+
+export const locales = muiLocales;
 
 export const ThemeProvider = ({children}: WithChildren) => {
   const {paletteMode, direction} = useApp();
@@ -15,7 +19,9 @@ export const ThemeProvider = ({children}: WithChildren) => {
     direction,
     typography
   }), [paletteMode, direction]);
-  const theme = createTheme(themeOptions);
+
+  const theme = useMemo(() => createTheme(themeOptions, locales[AppConfig.locale]), [AppConfig.locale]);
+
   theme.components = ComponentsOverrides(theme);
 
   return (

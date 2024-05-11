@@ -5,7 +5,7 @@ import { useApp } from "@hooks/useApp";
 import { changePalette } from "@redux/slices/appSlice";
 
 export default function Home() {
-  const {t, handleChangeLanguage, currentLang} = useLocales();
+  const {t, changeLocale, currentLocale} = useLocales();
   const dispatch = useDispatch();
   const {paletteMode} = useApp();
 
@@ -19,8 +19,8 @@ export default function Home() {
           {paletteMode}
         </Button>
         <Button variant="contained"
-                onClick={() => handleChangeLanguage(currentLang.value == "fa" ? "en" : "fa")}>
-          {currentLang.value}
+                onClick={() => changeLocale(currentLocale == "faIR" ? "enUS" : "faIR")}>
+          {currentLocale}
         </Button>
         <h2>{t('demo.title')}</h2>
       </>

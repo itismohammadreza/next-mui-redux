@@ -4,26 +4,31 @@ import { initReactI18next } from 'react-i18next';
 import enLocales from './en/common';
 import faLocales from './fa/common';
 import { AppConfig } from "@root/config";
+import { Locale } from "@models/theme";
 
-let lng = AppConfig.lang.value;
+let lng: Locale = AppConfig.locale;
 
 if (typeof window !== 'undefined') {
-  lng = localStorage.getItem('i18nextLng') || AppConfig.lang.value;
+  lng = localStorage.getItem(AppConfig.langStorageKey) as Locale || AppConfig.locale;
+}
+
+const resources: Partial<Record<Locale, { translation: any }>> = {
+  'enUS': {translation: enLocales},
+  'faIR': {translation: faLocales},
 }
 
 i18n
 .use(LanguageDetector)
 .use(initReactI18next)
 .init({
-  resources: {
-    en: {translations: enLocales},
-    fa: {translations: faLocales},
-  },
+  resources,
   lng,
-  fallbackLng: AppConfig.lang.value,
+  fallbackLng: AppConfig.locale,
+  detection: {
+    lookupLocalStorage: AppConfig.langStorageKey,
+    lookupSessionStorage: AppConfig.langStorageKey
+  },
   debug: false,
-  ns: ['translations'],
-  defaultNS: 'translations',
   interpolation: {
     escapeValue: false,
   },

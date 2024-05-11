@@ -1,4 +1,8 @@
+import { locales } from "@theme/theme";
+
 export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+
+export type Locale = keyof typeof locales;
 
 interface GradientsPaletteOptions {
   primary: string;

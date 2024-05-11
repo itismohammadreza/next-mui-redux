@@ -1,21 +1,21 @@
 import { useTranslation } from 'react-i18next';
-import { allLocales, AppConfig } from '../config';
+import { AppConfig } from '@root/config';
+import { Locale } from "@models/theme";
 
 export const useLocales = () => {
   const {i18n, t} = useTranslation();
 
-  const langStorage = typeof window !== 'undefined' ? localStorage.getItem('i18nextLng') : '';
+  const storageLocale: Locale = typeof window !== 'undefined' ? localStorage.getItem(AppConfig.langStorageKey) : undefined;
 
-  const currentLang = allLocales.find((_lang) => _lang.value === langStorage) || AppConfig.lang;
+  const currentLocale: Locale = storageLocale || AppConfig.locale;
 
-  const handleChangeLanguage = (newlang: string) => {
-    i18n.changeLanguage(newlang);
+  const changeLocale = (locale: Locale) => {
+    i18n.changeLanguage(locale);
   };
 
   return {
-    handleChangeLanguage,
     t,
-    currentLang,
-    allLanguages: allLocales,
+    changeLocale,
+    currentLocale,
   };
 }

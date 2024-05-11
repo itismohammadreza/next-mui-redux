@@ -7,7 +7,7 @@ const appSlice = createSlice({
   name: "app",
   initialState: {
     paletteMode: AppConfig.paletteMode,
-    lang: AppConfig.lang,
+    locale: AppConfig.locale,
     direction: AppConfig.direction,
   } as AppState,
   reducers: {
