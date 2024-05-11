@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useApp } from "@hooks/useApp";
 import { changePalette } from "@redux/slices/appSlice";
 
-export default function Home() {
+const Home = () => {
   const {t, changeLocale, currentLocale} = useLocales();
   const dispatch = useDispatch();
   const {paletteMode} = useApp();
@@ -27,3 +27,4 @@ export default function Home() {
   )
 }
 
+export default Home;

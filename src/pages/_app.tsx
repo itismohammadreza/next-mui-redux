@@ -3,7 +3,7 @@ import { StoreProvider } from "@redux/StoreProvider";
 import { ThemeProvider } from "@theme/theme";
 import '@locales/i18n';
 
-export default function App({Component, pageProps}: AppProps) {
+const App = ({Component, pageProps}: AppProps) => {
   return (
       <StoreProvider>
         <ThemeProvider>
@@ -12,3 +12,5 @@ export default function App({Component, pageProps}: AppProps) {
       </StoreProvider>
   )
 }
+
+export default App;

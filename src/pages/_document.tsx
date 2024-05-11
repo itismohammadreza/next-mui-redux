@@ -1,13 +1,16 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { getState } from "@redux/store/rootStore";
 
-export default function Document() {
+const Document = () => {
   return (
-    <Html lang="en">
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
+      <Html lang={getState().app.locale} dir={getState().app.direction}>
+        <Head/>
+        <body>
+          <Main/>
+          <NextScript/>
+        </body>
+      </Html>
   );
 }
+
+export default Document;
