@@ -1,6 +1,6 @@
 const fa = {
   demo: {
-    title: `Persian`,
+    title: "Persian",
   }
 };
 

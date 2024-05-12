@@ -1,10 +1,11 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import { getState } from "@redux/store/rootStore";
+import { Head, Html, Main, NextScript } from "next/document";
 
 const Document = () => {
   return (
-      <Html lang={getState().app.locale} dir={getState().app.direction}>
-        <Head/>
+      <Html>
+        <Head>
+          <link rel="icon" href="/favicon.ico"/>
+        </Head>
         <body>
           <Main/>
           <NextScript/>

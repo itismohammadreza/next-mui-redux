@@ -1,6 +1,6 @@
 const en = {
   demo: {
-    title: `English`,
+    title: "English",
   }
 };
 

@@ -1,4 +1,3 @@
-"use client"
 import { alpha } from '@mui/material/styles';
 
 const createGradient = (color1: string, color2: string) => {

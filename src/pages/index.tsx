@@ -23,6 +23,7 @@ const Home = () => {
           {currentLocale}
         </Button>
         <h2>{t('demo.title')}</h2>
+        تست فارسی 123
       </>
   )
 }
