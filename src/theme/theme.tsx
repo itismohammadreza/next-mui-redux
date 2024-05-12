@@ -34,7 +34,7 @@ export const ThemeProvider = ({children}: WithChildren) => {
 
   useEffect(() => {
     document.documentElement.setAttribute("dir", direction);
-    document.documentElement.setAttribute("lang", locale);
+    document.documentElement.setAttribute("lang", locale.substring(0, 2));
   }, [direction, locale]);
 
   return (
