@@ -10,6 +10,7 @@ export interface AppState {
   locale: Locale;
   langStorageKey: string;
   apiUrl: string;
+  requestTimeout: number;
 }
 
 export type UserState = User;
