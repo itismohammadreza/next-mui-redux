@@ -9,6 +9,7 @@ export interface AppState {
   direction: Direction;
   locale: Locale;
   langStorageKey: string;
+  apiUrl: string;
 }
 
 export type UserState = User;

@@ -5,4 +5,5 @@ export const AppConfig: Readonly<AppState> = {
   direction: "ltr",
   locale: "enUS",
   langStorageKey: "lng",
+  apiUrl: process.env.apiUrl!
 }
