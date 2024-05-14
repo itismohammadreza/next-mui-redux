@@ -3,7 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import enLocales from './en/common';
 import faLocales from './fa/common';
-import { AppConfig } from "@root/config";
+import { globalConfig } from "@config/globalConfig";
 import { Locale } from "@models/theme";
 
 const resources: Partial<Record<Locale, { translation: any }>> = {
@@ -16,11 +16,11 @@ i18n
 .use(initReactI18next)
 .init({
   resources,
-  lng: AppConfig.locale,
-  fallbackLng: AppConfig.locale,
+  lng: globalConfig.locale,
+  fallbackLng: globalConfig.locale,
   detection: {
-    lookupLocalStorage: AppConfig.langStorageKey,
-    lookupSessionStorage: AppConfig.langStorageKey
+    lookupLocalStorage: globalConfig.langStorageKey,
+    lookupSessionStorage: globalConfig.langStorageKey
   },
   debug: false,
   interpolation: {

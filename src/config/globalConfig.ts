@@ -1,6 +1,6 @@
 import { AppState } from "@models/dataModel";
 
-export const AppConfig: Readonly<AppState> = {
+export const globalConfig: Readonly<AppState> = {
   paletteMode: "light",
   direction: "ltr",
   locale: "enUS",

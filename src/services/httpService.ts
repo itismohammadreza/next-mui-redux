@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { axiosInterceptor } from "@services/axiosInterceptor";
+import { globalConfig } from "@config/globalConfig";
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.timeout = +process.env.REACT_APP_REQUEST_TIMEOUT!;
+axios.defaults.baseURL = globalConfig.apiUrl;
+axios.defaults.timeout = globalConfig.requestTimeout;
 
 type RequestConfig = Exclude<AxiosRequestConfig, "method" | "url" | "data">;
 
