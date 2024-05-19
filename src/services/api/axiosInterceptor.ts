@@ -26,9 +26,10 @@ const showFailureToast = (message: string) => {
 }
 
 const getRequestConfig = (config: AxiosRequestConfig) => {
-  const {pathname} = getUrlParts(config.url!);
+  const url = config.url.includes('http') ? config.url : `${config.baseURL}${config.url}`;
+  const {pathname} = getUrlParts(url!);
   const requestPathMatch = ({pathTemplate, isCustomApi}: RequestConfig) => {
-    const testCase = isCustomApi ? config.url : pathname;
+    const testCase = isCustomApi ? url : pathname;
     if (pathTemplate instanceof RegExp) {
       return pathTemplate.test(testCase);
     } else if (pathTemplate!.includes('*')) {
