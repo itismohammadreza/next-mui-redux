@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    apiUrl: 'https://api-host',
+    apiUrl: 'https://moviesapi.ir/api/v1',
   }
 };
 

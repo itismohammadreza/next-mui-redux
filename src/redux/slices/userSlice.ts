@@ -9,12 +9,8 @@ const userSlice = createSlice({
       state = {...state, ...action.payload};
       return state;
     },
-    setIsAlreadyConnected: (state: User, action: PayloadAction<User>) => {
-      state = {...state, ...action.payload};
-      return state;
-    },
   },
 });
 
-export const {updateUser, setIsAlreadyConnected} = userSlice.actions;
+export const {updateUser} = userSlice.actions;
 export const userReducer = userSlice.reducer;
