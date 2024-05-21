@@ -36,7 +36,6 @@ export interface User {
 
 export interface RootState {
   user: UserState;
-  loading: { value: boolean };
   app: AppState;
 }
 
