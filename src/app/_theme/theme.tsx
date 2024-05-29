@@ -1,3 +1,4 @@
+"use client"
 import { createTheme, CssBaseline } from "@mui/material";
 import { useEffect, useMemo } from "react";
 import { componentsOverrides } from "@theme/overrides/componentsOverrides";
@@ -11,21 +12,21 @@ import { scrollbar } from "@theme/overrides/scrollbar";
 
 export const locales = muiLocales;
 
-export const ThemeProvider = ({children}: WithChildren) => {
-  const {paletteMode, direction, locale} = useApp();
+export const ThemeProvider = ({ children }: WithChildren) => {
+  const { paletteMode, direction, locale } = useApp();
 
   const theme = useMemo(() =>
-          createTheme({
-            palette: palette[paletteMode],
-            direction,
-            typography
-          }, locales[locale]),
-      [locale, paletteMode, direction]);
+    createTheme({
+      palette: palette[paletteMode],
+      direction,
+      typography
+    }, locales[locale]),
+    [locale, paletteMode, direction]);
 
   theme.components = {
     MuiCssBaseline: {
       styleOverrides: `
-        ${scrollbar({thickness: '10px', radius: '10px', trackColor: '#f5f5f5', thumbColor: '#949494'})};
+        ${scrollbar({ thickness: '10px', radius: '10px', trackColor: '#f5f5f5', thumbColor: '#949494' })};
         ${appFonts}
       `
     },
@@ -38,9 +39,9 @@ export const ThemeProvider = ({children}: WithChildren) => {
   }, [direction, locale]);
 
   return (
-      <MUIThemeProvider theme={theme}>
-        <CssBaseline/>
-        {children}
-      </MUIThemeProvider>
+    <MUIThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MUIThemeProvider>
   );
 }

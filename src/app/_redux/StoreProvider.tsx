@@ -1,4 +1,3 @@
-"use client"
 import { WithChildren } from "@models/dataModel";
 import { Provider } from "react-redux";
 import { rootStore } from "@redux/store/rootStore";

@@ -1,8 +1,8 @@
+"use client"
 import { LoadingButton } from "@mui/lab";
 import TextFieldElement from "@components/forms/TextFieldElement";
 import { FormContainer } from "@components/forms/FormContainer";
 import CheckboxElement from "@components/forms/CheckboxElement";
-import { useGetMoviesQuery } from "@services/dataService.ts";
 
 const Login = () => {
   const {data, refetch, isFetching} = useGetMoviesQuery();
