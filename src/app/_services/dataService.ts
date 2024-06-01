@@ -26,9 +26,26 @@ const api = createApi({
       transformResponse: (data: any) => data.data,
       invalidatesTags: (result, error, arg) => [{type: "API_TAG", id: arg.id}]
     }),
+    login: builder.mutation({
+      query: (data: any) => ({url: `/login`, method: "POST", data}),
+      transformResponse: (data: any) => data.data,
+    }),
+    register: builder.mutation({
+      query: (data: any) => ({url: `/register`, method: "POST", data}),
+      transformResponse: (data: any) => data.data,
+    }),
   })
 })
 
 export const apiMiddleware = api.middleware;
 export const apiReducer = {[api.reducerPath]: api.reducer}
-export const {useGetMoviesQuery, useLazyGetMoviesQuery} = api;
+export const {
+  useGetMoviesQuery,
+  useLazyGetMoviesQuery,
+  useGetMovieQuery,
+  useLazyGetMovieQuery,
+  useAddMovieMutation,
+  useEditMovieMutation,
+  useLoginMutation,
+  useRegisterMutation,
+} = api;

@@ -1,8 +1,5 @@
 import { getState } from "@redux/store/rootStore";
-import { httpService } from "@services/api/httpService";
 import { redirect } from "next/navigation";
-
-const endpoint = "auth";
 
 const hasPermission = (input: string[] | string) => {
   if (!input || !input.length) {
@@ -10,17 +7,9 @@ const hasPermission = (input: string[] | string) => {
   }
   const userPermissions = getState().user.permissions;
   if (Array.isArray(input)) {
-    return userPermissions.some(p => input.includes(p))
+    return userPermissions?.some(p => input.includes(p))
   }
-  return userPermissions.includes(input)
-}
-
-const login = (data: any) => {
-  return httpService.post<any>(`${endpoint}/login`, data);
-}
-
-const register = (data: any) => {
-  return httpService.post(`${endpoint}/register`, data);
+  return userPermissions?.includes(input)
 }
 
 const logout = () => {
@@ -28,9 +17,12 @@ const logout = () => {
   redirect('/auth/login')
 }
 
+const hasToken = () => {
+  return !!localStorage.getItem('token');
+}
+
 export const authService = {
   hasPermission,
-  login,
-  register,
   logout,
+  hasToken
 }

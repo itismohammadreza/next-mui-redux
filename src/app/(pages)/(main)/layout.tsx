@@ -1,7 +1,7 @@
 import { Navbar } from "@components/Navbar";
-import { ReactNode } from "react";
+import { WithChildren } from "@models/common";
 
-const MainLayout = ({children}: Readonly<{ children: ReactNode }>) =>{
+const MainLayout = ({children}: WithChildren) =>{
   return (
       <Navbar>
         {children}

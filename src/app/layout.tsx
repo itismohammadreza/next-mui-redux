@@ -1,7 +1,16 @@
 import { Providers } from "@components/Providers";
-import { ReactNode } from "react";
+import { WithChildren } from "@models/common";
+import { Metadata } from "next";
 
-const RootLayout = ({children}: Readonly<{ children: ReactNode }>) => {
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Nextjs Base',
+    default: 'Nextjs Base',
+  },
+  description: 'The official Next.js base project.',
+};
+
+const RootLayout = ({children}: WithChildren) => {
   return (
       <html>
         <body>

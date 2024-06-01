@@ -19,23 +19,23 @@ export const Toast = () => {
 
   useEffect(() => {
     eventBusService.on("showToast", toast => {
-      setToast(toast)
+      setToast(toast);
       setOpen(true);
     })
   }, [])
 
   const closeButton = (
-    <IconButton size="small" color="inherit" onClick={handleClose}>
-      <CloseIcon fontSize="small" />
-    </IconButton>
+      <IconButton size="small" color="inherit" onClick={handleClose}>
+        <CloseIcon fontSize="small"/>
+      </IconButton>
   )
 
   return (
-    <Snackbar
-      open={open}
-      onClose={handleClose}
-      action={(toast.closable ?? true) ? closeButton : toast.action}
-      {...toast}
-    />
+      <Snackbar
+          open={open}
+          onClose={handleClose}
+          action={(toast.closable ?? true) ? closeButton : toast.action}
+          {...toast}
+      />
   )
 }
