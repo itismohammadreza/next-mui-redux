@@ -1,13 +1,13 @@
 import { forwardRef, ReactNode } from 'react';
 import { Box, BoxProps } from '@mui/material';
-import { Head } from "next/document";
+import { Head } from "next/head";
 
 interface PageProps extends BoxProps {
   children: ReactNode;
   meta?: ReactNode;
-  title: string;
-  suffix: string;
-  separator: string;
+  title?: string;
+  suffix?: string;
+  separator?: string;
 }
 
 export const Page = forwardRef<HTMLDivElement, PageProps>((props, ref) => {
