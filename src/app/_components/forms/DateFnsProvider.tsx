@@ -1,3 +1,4 @@
+'use client'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
 import { LocalizationProvider, LocalizationProviderProps, MuiPickersAdapter, } from '@mui/x-date-pickers'
 

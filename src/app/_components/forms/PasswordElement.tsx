@@ -1,3 +1,4 @@
+'use client'
 import { forwardRef, MouseEvent, ReactNode, Ref, RefAttributes, useState, } from 'react'
 import TextFieldElement, { TextFieldElementProps } from './TextFieldElement'
 import { IconButton, IconButtonProps, InputAdornment } from '@mui/material'

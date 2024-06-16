@@ -1,3 +1,4 @@
+'use client'
 import { FormContainer } from "@components/forms/FormContainer";
 import AutocompleteElement from "@components/forms/AutocompleteElement";
 import TextFieldElement from "@components/forms/TextFieldElement";

@@ -1,3 +1,4 @@
+'use client'
 import { TimePicker, TimePickerProps, TimePickerSlotProps, } from '@mui/x-date-pickers/TimePicker'
 import {
   Control,

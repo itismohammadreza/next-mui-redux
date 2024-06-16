@@ -1,3 +1,4 @@
+'use client'
 import PasswordElement, { PasswordElementProps } from './PasswordElement'
 import { FieldPath, FieldValues, useWatch } from 'react-hook-form'
 import { forwardRef, Ref, RefAttributes } from 'react'

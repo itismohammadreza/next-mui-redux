@@ -1,3 +1,4 @@
+'use client'
 import CloseIcon from '@mui/icons-material/Cancel'
 import {
   Control,

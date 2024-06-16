@@ -1,3 +1,4 @@
+'use client'
 import { DateTimePicker, DateTimePickerProps, DateTimePickerSlotProps, } from '@mui/x-date-pickers/DateTimePicker'
 import { Control, FieldError, FieldPath, PathValue, useController, UseControllerProps, } from 'react-hook-form'
 import { TextFieldProps, useForkRef } from '@mui/material'

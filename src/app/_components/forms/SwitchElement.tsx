@@ -1,3 +1,4 @@
+'use client'
 import { Control, FieldPath, FieldValues, PathValue, useController, } from 'react-hook-form'
 import { FormControlLabel, FormControlLabelProps, Switch, SwitchProps, useForkRef, } from '@mui/material'
 import { ChangeEvent, forwardRef, Ref, RefAttributes } from 'react'

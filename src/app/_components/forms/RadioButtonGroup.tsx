@@ -1,3 +1,4 @@
+'use client'
 import { forwardRef, ReactNode, Ref, RefAttributes } from 'react'
 import {
   Control,

@@ -1,3 +1,4 @@
+'use client'
 import { FormEventHandler, FormHTMLAttributes, PropsWithChildren } from 'react'
 import {
   FieldValues,

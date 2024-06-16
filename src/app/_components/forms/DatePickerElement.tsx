@@ -1,3 +1,4 @@
+'use client'
 import { DatePicker, DatePickerProps, DatePickerSlotProps, } from '@mui/x-date-pickers/DatePicker'
 import {
   Control,
