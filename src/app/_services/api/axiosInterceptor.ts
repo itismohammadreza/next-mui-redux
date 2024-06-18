@@ -4,6 +4,7 @@ import { RequestsConfig } from "@config/requestsConfig";
 import { globalConfig } from "@config/globalConfig";
 import { authService } from "@services/authService";
 import { eventBusService } from "@services/eventBusService";
+import { cookieService } from "@utils/coockieService";
 
 const requestsQueue: AxiosRequestConfig[] = [];
 const loadingRequestsCounter = new Map<string, number>();
@@ -96,7 +97,7 @@ const handleTimeout = (request: InternalAxiosRequestConfig) => {
 }
 
 const appendAuthToken = (config: InternalAxiosRequestConfig) => {
-  const storageToken = localStorage.getItem('token');
+  const storageToken = cookieService.get('token');
   if (!!storageToken) {
     config.headers.Authorization = `Bearer ${storageToken}`;
   }
