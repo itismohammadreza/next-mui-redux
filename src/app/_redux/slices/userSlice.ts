@@ -3,7 +3,7 @@ import { User } from "@models/business";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: {} as User,
+  initialState: null as User,
   reducers: {
     updateUser: (state: User, action: PayloadAction<User>) => {
       state = {...state, ...action.payload};
