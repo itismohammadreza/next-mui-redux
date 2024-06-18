@@ -1,5 +1,6 @@
 import { getState } from "@redux/store/rootStore";
 import { redirect } from "next/navigation";
+import { cookieService } from "@utils/coockieService";
 
 const hasPermission = (input: string[] | string) => {
   if (!input || !input.length) {
@@ -13,12 +14,12 @@ const hasPermission = (input: string[] | string) => {
 }
 
 const logout = () => {
-  localStorage.removeItem('token');
+  cookieService.del('token');
   redirect('/auth/login')
 }
 
 const hasToken = () => {
-  return !!localStorage.getItem('token');
+  return !!cookieService.get('token');
 }
 
 export const authService = {
