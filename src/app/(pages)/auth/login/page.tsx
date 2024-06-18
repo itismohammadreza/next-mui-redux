@@ -19,8 +19,8 @@ const Login = () => {
   const onSubmit = async (value: User) => {
     try {
       const {data} = await login(value);
-      cookieService.set('token', data.access_token, 5);
-      const {data: user} = await getProfile(data.access_token);
+      cookieService.set('token', data.access_token, {maxAge: 36000});
+      const {data: user} = await getProfile();
       dispatch(updateUser(user));
       router.push('/');
     } catch {

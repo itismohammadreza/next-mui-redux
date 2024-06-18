@@ -34,11 +34,7 @@ const api = createApi({
       query: (data: User) => ({url: `/auth/register`, method: "POST", data}),
     }),
     getProfile: builder.query({
-      query: (token: string) => ({
-        url: `/auth/profile`,
-        method: "GET",
-        headers: {Authorization: `Bearer ${token}`},
-      }),
+      query: () => ({url: `/auth/profile`, method: "GET"}),
     }),
   })
 })
