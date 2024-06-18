@@ -1,37 +1,50 @@
 "use client"
 import Button from '@mui/material/Button';
-import { useDispatch } from "react-redux";
 import { useApp } from "@hooks/useApp";
 import { changePalette } from "@redux/slices/appSlice";
 import { useLocales } from "@hooks/useLocales";
-import Link from "next/link";
-import { useLazyGetMoviesQuery } from "@services/dataService";
+import { useUser } from "@hooks/useUser";
+import { Page } from "@components/Page";
+import { Typography } from "@mui/material";
+import { authService } from "@services/authService";
+import { useLazyGetProductsQuery } from "@services/dataService";
+import { LoadingButton } from "@mui/lab";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
-  const {t, changeLocale, currentLocale} = useLocales();
+  const user = useUser();
+  const {changeLocale, currentLocale} = useLocales();
   const dispatch = useDispatch();
   const {paletteMode} = useApp();
-  const [trigger, {data, isLoading}] = useLazyGetMoviesQuery();
-
-  const changeThemeClick = async () => {
-    await trigger();
-    dispatch(changePalette(paletteMode == "light" ? "dark" : "light"));
-  }
+  const [trigger, {isLoading}] = useLazyGetProductsQuery();
 
   return (
-      <>
-        <Link href="/auth/login">Login</Link>
-        <Link href="/about">About</Link>
-        <Button variant="contained" onClick={changeThemeClick}>
+      <Page title="Home">
+        <Typography variant="h6" component="span"> Theme: </Typography>
+        <Button onClick={() => dispatch(changePalette(paletteMode == "light" ? "dark" : "light"))}>
           {paletteMode}
         </Button>
-        <Button variant="contained"
-                onClick={() => changeLocale(currentLocale == "faIR" ? "enUS" : "faIR")}>
+        <br/>
+        <Typography variant="h6" component="span"> Locale: </Typography>
+        <Button onClick={() => changeLocale(currentLocale == "faIR" ? "enUS" : "faIR")}>
           {currentLocale}
         </Button>
-        <h2>{t('title')}</h2>
-        تست فارسی 123
-      </>
+        <br/>
+        <Typography variant="h6" component="span"> Request: </Typography>
+        <LoadingButton loading={isLoading} onClick={() => trigger()}>
+          Call
+        </LoadingButton>
+        <br/>
+        {
+            user && (
+                <>
+                  <Typography variant="h6" component="span"> Logged In User: </Typography>
+                  {user.name} - {user.email}
+                  <Button color="error" onClick={() => authService.logout()}> Logout </Button>
+                </>
+            )
+        }
+      </Page>
   )
 }
 

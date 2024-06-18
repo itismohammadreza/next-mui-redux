@@ -4,16 +4,24 @@ import { useRouter } from "next/navigation";
 import { Container, Grid, Typography } from "@mui/material";
 import { FormElements } from "@components/forms/FormElements";
 import Link from "next/link";
-import { useLoginMutation } from "@services/dataService";
+import { useLazyGetProfileQuery, useLoginMutation } from "@services/dataService";
+import { User } from "@models/business";
+import { cookieService } from "@utils/coockieService";
+import { updateUser } from "@redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const router = useRouter();
-  const [trigger, {data, isLoading}] = useLoginMutation();
+  const dispatch = useDispatch();
+  const [login, {isLoading}] = useLoginMutation();
+  const [getProfile] = useLazyGetProfileQuery();
 
-  const onSubmit = async (value: any) => {
+  const onSubmit = async (value: User) => {
     try {
-      const res = await trigger(value);
-      localStorage.setItem('token', res.token);
+      const {data} = await login(value);
+      const {data: user} = await getProfile(data.access_token);
+      cookieService.set('token', data.access_token, 5);
+      dispatch(updateUser(user));
       router.push('/');
     } catch {
     }
@@ -48,10 +56,10 @@ const Login = () => {
           </LoadingButton>
           <Grid container>
             <Grid item xs>
-              <Link href="/auth/forget-password" variant="body2"> Forgot password? </Link>
+              <Link href="/auth/forget-password"> Forgot password? </Link>
             </Grid>
             <Grid item>
-              <Link href="/auth/register" variant="body2"> Don't have an account? Sign Up </Link>
+              <Link href="/auth/register"> Don't have an account? Sign Up </Link>
             </Grid>
           </Grid>
         </Container>

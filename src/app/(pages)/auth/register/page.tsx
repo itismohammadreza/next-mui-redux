@@ -8,17 +8,17 @@ import { useRegisterMutation } from "@services/dataService";
 
 const Register = () => {
   const router = useRouter();
-  const [trigger, {data, isLoading}] = useRegisterMutation();
+  const [trigger, {isLoading}] = useRegisterMutation();
 
   const onSubmit = async (value: any) => {
     try {
-      const res = await trigger(value);
+      await trigger(value);
       router.push('/');
     } catch {
     }
   }
 
-  return(
+  return (
       <FormElements.Container onSuccess={onSubmit}>
         <Container component="main" maxWidth="xs" sx={{marginTop: 8}}>
           <Typography component="h1" marginBottom={2} variant="h5" textAlign="center"> Sign up </Typography>
@@ -57,7 +57,7 @@ const Register = () => {
                   rules={{required: 'Required'}}/>
             </Grid>
           </Grid>
-          <LoadingButton type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
+          <LoadingButton loading={isLoading} type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2}}>
             Sign Up
           </LoadingButton>
           <Grid container justifyContent="flex-end">
