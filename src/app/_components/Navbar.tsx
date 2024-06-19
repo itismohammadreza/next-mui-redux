@@ -3,13 +3,12 @@ import { useState } from 'react';
 import {
   AppBar,
   Box,
-  Button,
-  Divider,
   Drawer,
   IconButton,
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   Toolbar,
   Typography
@@ -18,81 +17,108 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { WithChildren } from "@models/common";
 import { useLocales } from "@hooks/useLocales";
 import Link from "next/link";
+import { useUser } from "@hooks/useUser";
+import { usePathname } from "next/navigation";
+import { AccountCircle } from "@mui/icons-material";
 
 interface NavbarProps extends WithChildren {
   window?: () => Window;
 }
 
+const drawerWidth = 240;
+
 export const Navbar = (props: NavbarProps) => {
-  const { t } = useLocales();
-  const { window, children } = props;
+  const {t} = useLocales();
+  const currentUser = useUser();
+  const pathname = usePathname();
+  const {window, children} = props;
   const [open, setOpen] = useState(false);
-  const appTitle = t("appTitle")
   const navItems = [
-    { text: t('home'), href: '/' },
-    { text: t('about'), href: '/about' },
-    { text: t('login'), href: '/auth/login' },
-    { text: t('register'), href: '/auth/register' },
+    {text: t('home'), href: '/', icon: <MenuIcon/>},
+    {text: t('login'), href: '/auth/login', icon: <MenuIcon/>},
+    {text: t('protected'), href: '/protected', icon: <MenuIcon/>},
   ];
 
   const handleDrawerToggle = () => {
     setOpen(prev => !prev);
   };
 
-  const appBarItems = (
-    navItems.map(item => (
-      <Button component={Link} href={item.href} key={item.text} sx={{ color: '#fff' }}>
-        {item.text}
-      </Button>
-    ))
-  )
-  const drawerItems = (
-    <List>
-      {
-        navItems.map(item => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton component={Link} href={item.href} sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))
-      }
-    </List>
-  )
   const container = window !== undefined ? () => window().document.body : undefined;
 
+  const drawer = (
+      <div>
+        <Toolbar/>
+        <List>
+          {
+            navItems.map(item => (
+                <ListItem selected={item.href === pathname} key={item.text} disablePadding>
+                  <ListItemButton component={Link} href={item.href}>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.text}/>
+                  </ListItemButton>
+                </ListItem>
+            ))
+          }
+        </List>
+      </div>
+  );
+
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav">
-        <Toolbar>
-          <IconButton color="inherit" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: 'none' } }}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            {appTitle}
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {appBarItems}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        component="nav"
-        container={container}
-        open={open}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-        sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { width: 240 } }}>
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-          <Typography variant="h6" sx={{ my: 2 }}>{appTitle}</Typography>
-          <Divider />
-          {drawerItems}
+      <Box sx={{display: "flex"}}>
+        <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
+          <Toolbar>
+            <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} sx={{mr: 2, display: {md: "none"}}}>
+              <MenuIcon/>
+            </IconButton>
+            <Typography variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
+              {t("appTitle")}
+            </Typography>
+            {
+                currentUser &&
+                <IconButton size="large" color="inherit">
+                  <AccountCircle/>
+                </IconButton>
+            }
+          </Toolbar>
+        </AppBar>
+        <Box component="nav" sx={{width: {md: drawerWidth}, flexShrink: {md: 0}}} aria-label="mailbox folders">
+          <Drawer
+              container={container}
+              variant="temporary"
+              open={open}
+              onClose={handleDrawerToggle}
+              ModalProps={{keepMounted: true}}
+              sx={{
+                display: {xs: "block", sm: "block", md: "none"},
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth
+                }
+              }}>
+            {drawer}
+          </Drawer>
+          <Drawer
+              variant="permanent"
+              sx={{
+                display: {xs: "none", sm: "none", md: "block"},
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth
+                }
+              }}
+              open>
+            {drawer}
+          </Drawer>
         </Box>
-      </Drawer>
-      <Box component="main" sx={{ p: 1 }}>
-        <Toolbar />
-        {children}
+        <Box component="main"
+             sx={{
+               flexGrow: 1,
+               p: 3,
+               width: {md: `calc(100% - ${drawerWidth}px)`}
+             }}>
+          <Toolbar/>
+          {children}
+        </Box>
       </Box>
-    </Box>
   );
 }
