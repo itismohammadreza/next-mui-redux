@@ -39,6 +39,7 @@ const api = createApi({
   })
 })
 
+export const apiEndpoints = api.endpoints;
 export const apiMiddleware = api.middleware;
 export const apiReducer = {[api.reducerPath]: api.reducer}
 export const {

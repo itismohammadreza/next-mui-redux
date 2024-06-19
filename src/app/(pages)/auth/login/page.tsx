@@ -1,6 +1,6 @@
 "use client"
 import { LoadingButton } from "@mui/lab";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Container, Grid, Typography } from "@mui/material";
 import { FormElements } from "@components/forms/FormElements";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 
 const Login = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const [login, {isLoading}] = useLoginMutation();
   const [getProfile] = useLazyGetProfileQuery();
@@ -22,7 +23,7 @@ const Login = () => {
       cookieService.set('token', data.access_token, {maxAge: 36000});
       const {data: user} = await getProfile();
       dispatch(updateUser(user));
-      router.push('/');
+      router.push(searchParams.get('return') ?? '/');
     } catch {
     }
   }
