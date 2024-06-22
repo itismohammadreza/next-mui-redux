@@ -20,6 +20,11 @@ import Link from "next/link";
 import { useUser } from "@hooks/useUser";
 import { usePathname } from "next/navigation";
 import { AccountCircle } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { useApp } from "@hooks/useApp";
+import { changePalette } from "@redux/slices/appSlice";
+import LightModeIcon from '@mui/icons-material/LightMode';
+import ModeNightIcon from '@mui/icons-material/ModeNight';
 
 interface NavbarProps extends WithChildren {
   window?: () => Window;
@@ -30,6 +35,8 @@ const drawerWidth = 240;
 export const Navbar = (props: NavbarProps) => {
   const {t} = useLocales();
   const currentUser = useUser();
+  const dispatch = useDispatch();
+  const {paletteMode} = useApp();
   const pathname = usePathname();
   const {window, children} = props;
   const [open, setOpen] = useState(false);
@@ -38,6 +45,10 @@ export const Navbar = (props: NavbarProps) => {
     {text: t('login'), href: '/auth/login', icon: <MenuIcon/>},
     {text: t('protected'), href: '/protected', icon: <MenuIcon/>},
   ];
+
+  const handleThemeToggle = () => {
+    dispatch(changePalette(paletteMode == "light" ? "dark" : "light"));
+  }
 
   const handleDrawerToggle = () => {
     setOpen(prev => !prev);
@@ -73,6 +84,14 @@ export const Navbar = (props: NavbarProps) => {
             <Typography variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
               {t("appTitle")}
             </Typography>
+            {
+                paletteMode === 'dark' &&
+                <IconButton onClick={handleThemeToggle} size="large" color="inherit"><LightModeIcon/></IconButton>
+            }
+            {
+                paletteMode === 'light' &&
+                <IconButton onClick={handleThemeToggle} size="large" color="inherit"> <ModeNightIcon/></IconButton>
+            }
             {
                 currentUser &&
                 <IconButton size="large" color="inherit">
