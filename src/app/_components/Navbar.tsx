@@ -91,16 +91,12 @@ export const Navbar = (props: NavbarProps) => {
             <Typography variant="h6" noWrap sx={{flexGrow: 1}}>
               {t("appTitle")}
             </Typography>
-            {
-              <IconButton onClick={handleDirectionToggle} color="inherit">
-                {rtl ? <LToRIcon/> : <RToLIcon/>}
-              </IconButton>
-            }
-            {
-              <IconButton onClick={handleThemeToggle} color="inherit">
-                {paletteMode === 'dark' ? <LightModeIcon/> : <ModeNightIcon/>}
-              </IconButton>
-            }
+            <IconButton onClick={handleDirectionToggle} color="inherit">
+              {rtl ? <LToRIcon/> : <RToLIcon/>}
+            </IconButton>
+            <IconButton onClick={handleThemeToggle} color="inherit">
+              {paletteMode === 'dark' ? <LightModeIcon/> : <ModeNightIcon/>}
+            </IconButton>
             {
                 currentUser &&
                 <IconButton color="inherit">
