@@ -22,10 +22,12 @@ import { usePathname } from "next/navigation";
 import { AccountCircle } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { useApp } from "@hooks/useApp";
-import { changePalette } from "@redux/slices/appSlice";
+import { changePalette, changeToRtl } from "@redux/slices/appSlice";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import RemoveIcon from '@mui/icons-material/Remove';
+import LToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
+import RToLIcon from '@mui/icons-material/FormatTextdirectionRToL';
 
 interface NavbarProps extends WithChildren {
   window?: () => Window;
@@ -37,7 +39,7 @@ export const Navbar = (props: NavbarProps) => {
   const {t} = useLocales();
   const currentUser = useUser();
   const dispatch = useDispatch();
-  const {paletteMode} = useApp();
+  const {paletteMode, rtl} = useApp();
   const pathname = usePathname();
   const {window, children} = props;
   const [open, setOpen] = useState(false);
@@ -46,6 +48,10 @@ export const Navbar = (props: NavbarProps) => {
     {text: t('login'), href: '/auth/login', icon: <RemoveIcon/>},
     {text: t('protected'), href: '/protected', icon: <RemoveIcon/>},
   ];
+
+  const handleDirectionToggle = () => {
+    dispatch(changeToRtl(!rtl));
+  }
 
   const handleThemeToggle = () => {
     dispatch(changePalette(paletteMode == "light" ? "dark" : "light"));
@@ -86,12 +92,14 @@ export const Navbar = (props: NavbarProps) => {
               {t("appTitle")}
             </Typography>
             {
-                paletteMode === 'dark' &&
-                <IconButton onClick={handleThemeToggle} color="inherit"><LightModeIcon/></IconButton>
+              <IconButton onClick={handleDirectionToggle} color="inherit">
+                {rtl ? <LToRIcon/> : <RToLIcon/>}
+              </IconButton>
             }
             {
-                paletteMode === 'light' &&
-                <IconButton onClick={handleThemeToggle} color="inherit"> <ModeNightIcon/></IconButton>
+              <IconButton onClick={handleThemeToggle} color="inherit">
+                {paletteMode === 'dark' ? <LightModeIcon/> : <ModeNightIcon/>}
+              </IconButton>
             }
             {
                 currentUser &&

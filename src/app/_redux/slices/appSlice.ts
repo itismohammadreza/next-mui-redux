@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppState } from "@models/common";
-import { Direction, PaletteMode } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 import { globalConfig } from "@config/globalConfig";
 import { Locale } from "@models/theme";
 
@@ -11,8 +11,8 @@ const appSlice = createSlice({
     changePalette: (state: AppState, action: PayloadAction<PaletteMode>) => {
       state.paletteMode = action.payload;
     },
-    changeDirection: (state: AppState, action: PayloadAction<Direction>) => {
-      state.direction = action.payload;
+    changeToRtl: (state: AppState, action: PayloadAction<boolean>) => {
+      state.rtl = action.payload;
     },
     changeLocale: (state: AppState, action: PayloadAction<Locale>) => {
       state.locale = action.payload;
@@ -20,5 +20,5 @@ const appSlice = createSlice({
   },
 });
 
-export const {changePalette, changeDirection, changeLocale} = appSlice.actions;
+export const {changePalette, changeToRtl, changeLocale} = appSlice.actions;
 export const appReducer = appSlice.reducer;

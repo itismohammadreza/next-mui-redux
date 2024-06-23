@@ -1,7 +1,7 @@
 import { Button, keyframes, styled } from "@mui/material";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 const NotFound = () => {
   const float = keyframes`
@@ -94,10 +94,10 @@ const NotFound = () => {
           <Typography variant="h1" sx={{fontSize: '60px', lineHeight: '46px', marginBottom: '40px'}}>404</Typography>
           <Typography variant="body1">Page not found</Typography>
           <Box sx={{marginTop: '40px'}}>
-            <Button onClick={() => window.history.back()} sx={{marginRight: '10px'}}>
+            <Button component={Link} href="../" sx={{marginRight: '10px'}}>
               Go Back
             </Button>
-            <Button component={Link} to="/">
+            <Button component={Link} href="/">
               Go to Home Page
             </Button>
           </Box>

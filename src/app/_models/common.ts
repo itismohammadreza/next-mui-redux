@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Direction, PaletteMode, SnackbarProps } from "@mui/material";
+import { PaletteMode, SnackbarProps } from "@mui/material";
 import { Locale } from "@models/theme";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
 import { UserState } from "@models/business";
@@ -29,7 +29,7 @@ export type Events = {
 
 export interface AppState {
   paletteMode: PaletteMode;
-  direction: Direction;
+  rtl: boolean;
   locale: Locale;
   langStorageKey: string;
   apiUrl: string;
