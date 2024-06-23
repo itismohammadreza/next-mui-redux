@@ -138,10 +138,10 @@ const handleHttpError = (error: AxiosError) => {
   if (![false, undefined].includes(failureMessage)) {
     showFailureToast(failureMessage || response?.data?.message);
   }
-  if (error.status === 403) {
-    authService.logout();
-  }
   removeRequestFromQueue(config!);
+  if (response!.status === 401) {
+    return authService.logout();
+  }
 }
 
 export const axiosInterceptor = (axiosInstance: Axios) => {

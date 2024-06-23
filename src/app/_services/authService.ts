@@ -1,6 +1,7 @@
-import { getState } from "@redux/store/rootStore";
+import { dispatch, getState } from "@redux/store/rootStore";
 import { redirect } from "next/navigation";
 import { cookieService } from "@utils/coockieService";
+import { updateUser } from "@redux/slices/userSlice";
 
 const hasPermission = (input: string[] | string) => {
   if (!input || !input.length) {
@@ -13,9 +14,16 @@ const hasPermission = (input: string[] | string) => {
   return userPermissions?.includes(input)
 }
 
-const logout = () => {
+const logout = (returnPath?: string) => {
+  let destination = "/auth/login";
   cookieService.del('token');
-  redirect('/auth/login')
+  dispatch(updateUser(null));
+  if (returnPath) {
+    const params = new URLSearchParams();
+    params.set("return", returnPath);
+    destination = `${destination}?${params.toString()}`;
+  }
+  return redirect(destination);
 }
 
 const hasToken = () => {
