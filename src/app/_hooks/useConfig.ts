@@ -12,16 +12,15 @@ export const useConfig = () => {
   return [
     appConfig,
     (config: Partial<ConfigState>) => {
-      const {locale, rtl, paletteMode} = config;
-      if (locale) {
-        dispatch(changeLocale(locale));
-        i18n.changeLanguage(locale);
+      if ('locale' in config) {
+        dispatch(changeLocale(config.locale!));
+        i18n.changeLanguage(config.locale);
       }
-      if (rtl) {
-        dispatch(changeToRtl(rtl));
+      if ('rtl' in config) {
+        dispatch(changeToRtl(config.rtl!));
       }
-      if (paletteMode) {
-        dispatch(changePalette(paletteMode));
+      if ('paletteMode' in config) {
+        dispatch(changePalette(config.paletteMode!));
       }
     }
   ] as [ConfigState, (config: Partial<ConfigState>) => void]

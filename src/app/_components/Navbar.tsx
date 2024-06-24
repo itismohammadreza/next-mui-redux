@@ -36,7 +36,7 @@ const drawerWidth = 240;
 export const Navbar = (props: NavbarProps) => {
   const {t} = useTranslation();
   const currentUser = useUser();
-  const [{paletteMode, rtl}, updateConfig] = useConfig();
+  const [{paletteMode, rtl, locale}, updateConfig] = useConfig();
   const pathname = usePathname();
   const {window, children} = props;
   const [open, setOpen] = useState(false);
@@ -45,6 +45,10 @@ export const Navbar = (props: NavbarProps) => {
     {text: t('login'), href: '/auth/login', icon: <RemoveIcon/>},
     {text: t('protected'), href: '/protected', icon: <RemoveIcon/>},
   ];
+
+  const handleLocaleToggle = () => {
+    updateConfig({locale: locale === 'faIR' ? 'enUS' : 'faIR'});
+  }
 
   const handleDirectionToggle = () => {
     updateConfig({rtl: !rtl});
@@ -88,6 +92,9 @@ export const Navbar = (props: NavbarProps) => {
             <Typography variant="h6" noWrap sx={{flexGrow: 1}}>
               {t("appTitle")}
             </Typography>
+            <IconButton onClick={handleLocaleToggle} color="inherit">
+              {locale === 'faIR' ? 'Fa' : 'En'}
+            </IconButton>
             <IconButton onClick={handleDirectionToggle} color="inherit">
               {rtl ? <LToRIcon/> : <RToLIcon/>}
             </IconButton>
