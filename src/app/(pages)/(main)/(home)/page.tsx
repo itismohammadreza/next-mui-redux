@@ -1,9 +1,8 @@
 "use client"
-import Button from '@mui/material/Button';
+import { Button, Typography } from '@mui/material';
 import { useLocales } from "@hooks/useLocales";
 import { useUser } from "@hooks/useUser";
 import { Page } from "@components/Page";
-import { Typography } from "@mui/material";
 import { authService } from "@services/authService";
 import { useLazyGetProductsQuery } from "@services/dataService";
 import { LoadingButton } from "@mui/lab";

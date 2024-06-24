@@ -1,6 +1,5 @@
-import { Button, keyframes, styled } from "@mui/material";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+"use client"
+import { Box, Button, keyframes, styled, Typography } from "@mui/material";
 import Link from "next/link";
 
 const NotFound = () => {

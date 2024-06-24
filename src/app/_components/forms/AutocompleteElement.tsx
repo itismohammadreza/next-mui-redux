@@ -17,11 +17,11 @@ import {
   AutocompleteValue,
   Checkbox,
   ChipTypeMap,
+  CircularProgress,
   TextField,
   TextFieldProps,
   useForkRef,
 } from '@mui/material'
-import CircularProgress from '@mui/material/CircularProgress'
 import { useFormError } from './FormErrorProvider'
 import { ElementType, forwardRef, ReactNode, Ref, RefAttributes, SyntheticEvent, } from 'react'
 import { useTransform } from './useTransform'

@@ -1,13 +1,12 @@
 "use client"
-import { createTheme, CssBaseline } from "@mui/material";
 import { useEffect, useMemo } from "react";
+import { createTheme, CssBaseline, ThemeProvider as MUIThemeProvider } from "@mui/material";
+import * as muiLocales from "@mui/material/locale";
 import { componentsOverrides } from "@theme/overrides/componentsOverrides";
-import { ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
 import { palette } from './overrides/palette';
 import { appFonts, typography } from './overrides/typography';
 import { WithChildren } from "@models/common";
 import { useApp } from "@hooks/useApp";
-import * as muiLocales from "@mui/material/locale";
 import { scrollbar } from "@theme/overrides/scrollbar";
 
 export const locales = muiLocales;
@@ -15,13 +14,11 @@ export const locales = muiLocales;
 export const ThemeProvider = ({children}: WithChildren) => {
   const {paletteMode, rtl, locale} = useApp();
 
-  const theme = useMemo(() =>
-          createTheme({
-            palette: palette[paletteMode],
-            direction: rtl ? 'rtl' : 'ltr',
-            typography
-          }, locales[locale]),
-      [locale, paletteMode, rtl]);
+  const theme = useMemo(() => createTheme({
+    palette: palette[paletteMode],
+    direction: rtl ? 'rtl' : 'ltr',
+    typography
+  }, locales[locale]), [locale, paletteMode, rtl]);
 
   theme.components = {
     MuiCssBaseline: {
