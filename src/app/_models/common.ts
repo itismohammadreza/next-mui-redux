@@ -40,5 +40,3 @@ export interface RootState {
   user: UserState;
   config: ConfigState;
 }
-
-export type WithChildren<T = any> = { children: ReactNode; } & T;

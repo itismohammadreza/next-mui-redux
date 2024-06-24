@@ -1,6 +1,6 @@
 import { Providers } from "@components/Providers";
-import { WithChildren } from "@models/common";
 import { Metadata } from "next";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'The official Next.js base project.',
 };
 
-const RootLayout = ({children}: WithChildren) => {
+const RootLayout = ({children}: PropsWithChildren) => {
   return (
       <html>
         <body>

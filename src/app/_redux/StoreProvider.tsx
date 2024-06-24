@@ -1,9 +1,8 @@
-import { WithChildren } from "@models/common";
 import { Provider } from "react-redux";
 import { rootStore } from "@redux/store/rootStore";
-import { useRef } from "react";
+import { PropsWithChildren, useRef } from "react";
 
-export const StoreProvider = ({children}: WithChildren) => {
+export const StoreProvider = ({children}: PropsWithChildren) => {
   const storeRef = useRef<typeof rootStore>();
 
   if (!storeRef.current) {

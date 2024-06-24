@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import {
   AppBar,
   Box,
@@ -14,7 +14,6 @@ import {
   Typography
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { WithChildren } from "@models/common";
 import Link from "next/link";
 import { useUser } from "@hooks/useUser";
 import { usePathname } from "next/navigation";
@@ -27,7 +26,7 @@ import LToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
 import RToLIcon from '@mui/icons-material/FormatTextdirectionRToL';
 import { useTranslation } from "react-i18next";
 
-interface NavbarProps extends WithChildren {
+interface NavbarProps extends PropsWithChildren {
   window?: () => Window;
 }
 

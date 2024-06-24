@@ -1,7 +1,7 @@
 import { Navbar } from "@components/Navbar";
-import { WithChildren } from "@models/common";
+import { PropsWithChildren } from "react";
 
-const MainLayout = ({children}: WithChildren) =>{
+const MainLayout = ({children}: PropsWithChildren) =>{
   return (
       <Navbar>
         {children}
