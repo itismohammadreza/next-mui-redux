@@ -1,6 +1,5 @@
 "use client"
 import { Button, Typography } from '@mui/material';
-import { useLocales } from "@hooks/useLocales";
 import { useUser } from "@hooks/useUser";
 import { Page } from "@components/Page";
 import { authService } from "@services/authService";
@@ -9,18 +8,12 @@ import { LoadingButton } from "@mui/lab";
 
 const Home = () => {
   const user = useUser();
-  const {changeLocale, currentLocale} = useLocales();
   const [trigger, {isLoading}] = useLazyGetProductsQuery();
 
   return (
       <Page title="Home">
-        <Typography variant="h6" component="span"> Locale: </Typography>
-        <Button onClick={() => changeLocale(currentLocale == "faIR" ? "enUS" : "faIR")}>
-          {currentLocale}
-        </Button>
-        <br/>
         <Typography variant="h6" component="span"> Request: </Typography>
-        <LoadingButton loading={isLoading} onClick={() => trigger()}>
+        <LoadingButton loading={isLoading} onClick={trigger}>
           Call
         </LoadingButton>
         <br/>

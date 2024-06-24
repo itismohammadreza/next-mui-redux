@@ -15,19 +15,17 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { WithChildren } from "@models/common";
-import { useLocales } from "@hooks/useLocales";
 import Link from "next/link";
 import { useUser } from "@hooks/useUser";
 import { usePathname } from "next/navigation";
 import { AccountCircle } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
-import { useApp } from "@hooks/useApp";
-import { changePalette, changeToRtl } from "@redux/slices/appSlice";
+import { useConfig } from "@hooks/useConfig";
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import RemoveIcon from '@mui/icons-material/Remove';
 import LToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
 import RToLIcon from '@mui/icons-material/FormatTextdirectionRToL';
+import { useTranslation } from "react-i18next";
 
 interface NavbarProps extends WithChildren {
   window?: () => Window;
@@ -36,10 +34,9 @@ interface NavbarProps extends WithChildren {
 const drawerWidth = 240;
 
 export const Navbar = (props: NavbarProps) => {
-  const {t} = useLocales();
+  const {t} = useTranslation();
   const currentUser = useUser();
-  const dispatch = useDispatch();
-  const {paletteMode, rtl} = useApp();
+  const [{paletteMode, rtl}, updateConfig] = useConfig();
   const pathname = usePathname();
   const {window, children} = props;
   const [open, setOpen] = useState(false);
@@ -50,11 +47,11 @@ export const Navbar = (props: NavbarProps) => {
   ];
 
   const handleDirectionToggle = () => {
-    dispatch(changeToRtl(!rtl));
+    updateConfig({rtl: !rtl});
   }
 
   const handleThemeToggle = () => {
-    dispatch(changePalette(paletteMode == "light" ? "dark" : "light"));
+    updateConfig({paletteMode: paletteMode == "light" ? "dark" : "light"});
   }
 
   const handleDrawerToggle = () => {

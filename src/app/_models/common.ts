@@ -27,7 +27,7 @@ export type Events = {
   loading: boolean;
 }
 
-export interface AppState {
+export interface ConfigState {
   paletteMode: PaletteMode;
   rtl: boolean;
   locale: Locale;
@@ -38,7 +38,7 @@ export interface AppState {
 
 export interface RootState {
   user: UserState;
-  app: AppState;
+  config: ConfigState;
 }
 
 export type WithChildren<T = any> = { children: ReactNode; } & T;
