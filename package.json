@@ -23,7 +23,9 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
     "react-i18next": "^14.1.1",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "stylis": "^4.3.2",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
