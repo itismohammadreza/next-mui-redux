@@ -1,5 +1,4 @@
-'use client'
-import { FormEventHandler, FormHTMLAttributes, PropsWithChildren } from 'react'
+import { FormEventHandler, FormHTMLAttributes, PropsWithChildren } from 'react';
 import {
   FieldValues,
   FormProvider,
@@ -7,40 +6,47 @@ import {
   SubmitHandler,
   useForm,
   UseFormProps,
-  UseFormReturn,
-} from 'react-hook-form'
+  UseFormReturn
+} from 'react-hook-form';
 
 export type FormContainerProps<T extends FieldValues = FieldValues> =
-    PropsWithChildren<
-        UseFormProps<T> & {
+    PropsWithChildren<UseFormProps<T> & {
       onSuccess?: SubmitHandler<T>
       onError?: SubmitErrorHandler<T>
       FormProps?: FormHTMLAttributes<HTMLFormElement>
       handleSubmit?: FormEventHandler<HTMLFormElement>
       formContext?: UseFormReturn<T>
-    }
-    >
+    }>
 
-export function FormContainer<TFieldValues extends FieldValues = FieldValues>({
-                                                                                handleSubmit,
-                                                                                children,
-                                                                                FormProps,
-                                                                                formContext,
-                                                                                onSuccess,
-                                                                                onError,
-                                                                                ...useFormProps
-                                                                              }: PropsWithChildren<FormContainerProps<TFieldValues>>) {
+export const FormContainer = <
+    TFieldValues extends FieldValues = FieldValues
+>(
+    props: PropsWithChildren<FormContainerProps<TFieldValues>>
+) => {
+  const {
+    handleSubmit,
+    children,
+    FormProps,
+    formContext,
+    onSuccess,
+    onError,
+    ...useFormProps
+  } = props;
+
   if (!formContext) {
     return (
         <FormProviderWithoutContext<TFieldValues>
-            {...{onSuccess, onError, FormProps, children, ...useFormProps}}
-        />
+            {...{
+              onSuccess,
+              onError,
+              FormProps,
+              children,
+              ...useFormProps
+            }}/>
     )
   }
   if (typeof onSuccess === 'function' && typeof handleSubmit === 'function') {
-    console.warn(
-        'Property `onSuccess` will be ignored because handleSubmit is provided'
-    )
+    console.warn('Property `onSuccess` will be ignored because handleSubmit is provided');
   }
   return (
       <FormProvider {...formContext}>
@@ -53,27 +59,27 @@ export function FormContainer<TFieldValues extends FieldValues = FieldValues>({
                   : onSuccess
                       ? formContext.handleSubmit(onSuccess, onError)
                       : () => console.log('submit handler `onSuccess` is missing')
-            }
-        >
+            }>
           {children}
         </form>
       </FormProvider>
   )
 }
 
-function FormProviderWithoutContext<
-    TFieldValues extends FieldValues = FieldValues,
->({
+const FormProviderWithoutContext = <
+    TFieldValues extends FieldValues = FieldValues
+>(props: PropsWithChildren<FormContainerProps<TFieldValues>>
+) => {
+  const {
     onSuccess,
     onError,
     FormProps,
     children,
     ...useFormProps
-  }: PropsWithChildren<FormContainerProps<TFieldValues>>) {
-  const methods = useForm<TFieldValues>({
-    ...useFormProps,
-  })
-  const {handleSubmit} = methods
+  } = props;
+
+  const methods = useForm<TFieldValues>({...useFormProps});
+  const {handleSubmit} = methods;
 
   return (
       <FormProvider {...methods}>
@@ -85,8 +91,7 @@ function FormProviderWithoutContext<
                 onError
             )}
             noValidate
-            {...FormProps}
-        >
+            {...FormProps}        >
           {children}
         </form>
       </FormProvider>
